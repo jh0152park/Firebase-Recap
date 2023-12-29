@@ -25,7 +25,7 @@
 4. 복사해둔 `firebaseConfig` 키값을 `.env` 파일에 복사하기
 5. `.gitignore`에 `.env`가 포함 되어있는지 확인하기
 
-### KEY값 이름 앞에 `REACT_APP_` 을 꼭 붙여야 한다
+### .env 파일을 만들때 KEY값 이름 앞에 `REACT_APP_` 을 꼭 붙여야 한다
 
 ```
 REACT_APP_API_KEY="my api key"
@@ -36,11 +36,28 @@ REACT_APP_MESSAGING_SENDER_ID="my messaging sender id"
 REACT_APP_APP_ID="my app id"
 ```
 
-### .env 파일안에 key값은 아래처럼 사용한다
+### .env 파일의 key값은 아래처럼 사용한다
 
 ```
 const API_KEY = process.env.REACT_APP_API_KEY;
 const AUTH_DOMAIN = process.env.REACT_APP_AUTH_DOMAIN;
 ...
 ...
+```
+
+## firebase config 선언하기
+
+```JS
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+};
+
+const app = initializeApp(firebaseConfig);
 ```
