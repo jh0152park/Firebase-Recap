@@ -13,3 +13,8 @@
 # 프로젝트에 앱 추가하기
 ## iOS / Android / Web 선택하기
 ![스크린샷 2023-12-29 오후 9 45 01](https://github.com/jh0152park/Firebase-Recap/assets/118165975/c7787335-544a-4cae-a2a8-1630da41047c)
+![스크린샷 2023-12-29 오후 9 53 05](https://github.com/jh0152park/Firebase-Recap/assets/118165975/f5e7f2c4-90e3-406e-9a43-378dd0082b3b)
+![스크린샷 2023-12-29 오후 9 53 29](https://github.com/jh0152park/Firebase-Recap/assets/118165975/3a00bcda-79d1-48ba-901f-57d8d9db2522)
+
+1. `npm install firebase`
+2. `firebaseConfig` key 복사해두기
