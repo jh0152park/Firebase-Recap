@@ -21,7 +21,7 @@
 
 1. `npm install firebase`
 2. `firebaseConfig` key 복사해두기
-3. `src` 폴더에 `.env` 파일 생성하기 (`App.tsx`, `index.tsx` 파일과 같은 경로)
+3. `src` 폴더가 아닌 최상위 폴더에 `.env` 파일 생성하기
 4. 복사해둔 `firebaseConfig` 키값을 `.env` 파일에 복사하기
 5. `.gitignore`에 `.env`가 포함 되어있는지 확인하기
 
