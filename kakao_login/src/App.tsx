@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Center, Heading, Text } from "@chakra-ui/react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Center w="100%" h="100vh">
+            <Center
+                w="250px"
+                h="50px"
+                borderRadius="30px"
+                bgColor="yellow.400"
+                _hover={{
+                    cursor: "pointer",
+                    bgColor: "yellow.500",
+                }}
+                transition="all 0.2s linear"
+            >
+                <Text fontWeight="bold" fontSize="25px">
+                    카카오 로그인하기
+                </Text>
+            </Center>
+        </Center>
+    );
 }
 
 export default App;
