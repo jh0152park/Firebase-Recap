@@ -70,3 +70,17 @@ if (!code) {
     navigate("/login");
 }
 ```
+
+## 13. firebase function을 사용하기 위해 `npm install firebase-tools` 명령어로 설치 진행
+
+### 13-1. 터미널에 `firebase login` 입력 후 로그인 (로그인이 되어 있다면, Already logged in as `my account`가 출력)
+
+### 13-2. 터미널에 `firebase init functions` 입력
+
+### 13-3. `Use an existing project` 선택 후 현재 firebase에서 사용중인 프로젝트 선택
+
+### 13-4. 언어는 타입스크립트 선택
+
+### 13-5. 이후 모두 엔터
+
+### 13-6. 이제 `functions/src/index.ts`에 코드 작성이 가능
