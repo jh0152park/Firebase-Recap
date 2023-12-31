@@ -67,3 +67,5 @@ const app = initializeApp(firebaseConfig);
 ## [1. 이메일 + 비밀번호로 인증없이 계정 만들기](https://github.com/jh0152park/Firebase-Recap/tree/main/create_account_email_and_passwrod)
 
 ## [2. 이메일 인증으로 계정 만들기](https://github.com/jh0152park/Firebase-Recap/tree/main/create_account_with_email_validation)
+
+## [3. 카카오 로그인](https://github.com/jh0152park/Firebase-Recap/tree/main/kakao_login)
