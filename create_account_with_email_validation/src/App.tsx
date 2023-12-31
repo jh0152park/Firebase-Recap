@@ -4,6 +4,7 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     updateProfile,
+    sendEmailVerification,
 } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import {
@@ -32,29 +33,25 @@ function App() {
     const [create, setCreate] = useState(false);
     const { register, handleSubmit, reset } = useForm();
 
-    async function onSubmit(data: any) {
-        try {
-            setCreate(true);
-            const credentials = await createUserWithEmailAndPassword(
-                auth,
-                data.email,
-                data.password
-            );
-            // await updateProfile(credentials.user, {
-            //   displayName: data.name
-            // })
-            //
-            alert("Create Account Done");
-        } catch (e) {
-            if (e instanceof FirebaseError) {
-                const errorCode = e.code;
-                const errorMessage = e.message;
+    function onSubmit(data: any) {
+        setCreate(true);
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+            .then((userCredential) => {
+                sendEmailVerification(userCredential.user).then(() => {
+                    alert("send verification email");
+                    console.log(userCredential.user.email);
+                    console.log(userCredential.user.emailVerified);
+                });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
                 console.log(`code: ${errorCode}, message: ${errorMessage}`);
-            }
-        } finally {
-            reset();
-            setCreate(false);
-        }
+            })
+            .finally(() => {
+                reset();
+                setCreate(false);
+            });
     }
 
     return (
@@ -74,7 +71,7 @@ function App() {
                         })}
                     />
                 </VStack>
-                <Button colorScheme="teal" type="submit" isLoading={create}>
+                <Button colorScheme="pink" type="submit" isLoading={create}>
                     Submit
                 </Button>
             </VStack>
