@@ -31,6 +31,7 @@
 ![스크린샷 2023-12-31 오후 10 10 46](https://github.com/jh0152park/Firebase-Recap/assets/118165975/30a76b59-b771-4053-83f2-f09386895e2b)
 
 ## 7. 동의항목 => 필요한 데이터 설정 ex)프로필 정보, 이메일, 성별, etc...
+![스크린샷 2023-12-31 오후 10 46 16](https://github.com/jh0152park/Firebase-Recap/assets/118165975/e424c749-c333-412e-a5d0-f463566f5357)
 
 ## 8. [JavaScript Download](https://developers.kakao.com/docs/latest/ko/javascript/download) 에서 Full SDK 복사 후 `public/index.html`의 head 부분에 복사
 
@@ -59,6 +60,7 @@ function onLoginWithKakao() {
 ```
 
 ## 11. 로그인이 정상적으로 이루어졌다면, 미리 정의해둔 Redirect URL로 이동하게되고 Token이 함께 넘어옴
+![스크린샷 2023-12-31 오후 11 24 18](https://github.com/jh0152park/Firebase-Recap/assets/118165975/30018093-d372-42ca-bba1-749bbda1a16f)
 
 ## 12. `URLSearchParams`를 이용해 code(token)값을 갖고오고, 만약 없다면 로그인을 다시하도록 구성
 
@@ -126,3 +128,5 @@ exports.auth = functions.https.onRequest(app);
 ### [KAKAO REST API DOC](https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token)
 
 ## 17. 토큰을 요청하기 위해서는 REST API키가 필수이고, 이는 [내 애플리케이션] > [앱 키]에서 확인 가능
+![스크린샷 2024-01-01 오전 12 16 52](https://github.com/jh0152park/Firebase-Recap/assets/118165975/c172225c-731a-4f40-835b-e5a3abec1ddd)
+
