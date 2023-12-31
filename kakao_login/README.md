@@ -1,3 +1,5 @@
+참고: https://velog.io/@hadam/integrate-kakao-login-with-firebase-using-react-and-functions-2
+
 ## 1.[카카오 개발자 사이트 이동](https://developers.kakao.com)
 
 ![스크린샷 2023-12-31 오후 8 30 28](https://github.com/jh0152park/Firebase-Recap/assets/118165975/e060430b-1b24-46bb-bd04-393d3ad78dcd)
@@ -84,3 +86,43 @@ if (!code) {
 ### 13-5. 이후 모두 엔터
 
 ### 13-6. 이제 `functions/src/index.ts`에 코드 작성이 가능
+
+## 14. [HTTP 요청 함수 작성](https://firebase.google.com/docs/functions/http-events?hl=ko&gen=2nd)
+
+### 필요한 API들
+
+#### - 클라이언트로 부터 인가 코드를 전달 받는 함수
+
+#### - 인가 코드로 토큰 발급을 요청할 함수
+
+#### - 카카오 유저 정보를 갖고오는 함수
+
+#### - Firebase auth user 생성하는 함수
+
+#### - 생성된 user id를 이용해 custom token을 생성하는 함수
+
+#### - 클라이언트로 custome token을 전달하는 함수
+
+## 15. `npm install express cors` 명령어를 이용해 설치
+
+## 16. `functions/src/index.ts`파일에 express 앱을 생성
+
+```JS
+import * as functions from "firebase-functions";
+import * as express from "express";
+import * as cors from "cors";
+
+const app = express();
+app.use(cors({ origin: true }));
+
+app.post("/kakao", async (req, res) => {
+    // TODO: API 구현하기
+});
+
+exports.auth = functions.https.onRequest(app);
+
+```
+
+### [KAKAO REST API DOC](https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token)
+
+## 17. 토큰을 요청하기 위해서는 REST API키가 필수이고, 이는 [내 애플리케이션] > [앱 키]에서 확인 가능
