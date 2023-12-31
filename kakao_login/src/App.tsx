@@ -1,25 +1,40 @@
-import { Center, Heading, Text } from "@chakra-ui/react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Layout from "./Layout";
+import Home from "./screens/Home";
+import Login from "./screens/Login";
+import Kakao from "./screens/Kakao";
+import NotFound from "./screens/Notfound";
+import SNSLogin from "./screens/SNS";
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        errorElement: <NotFound />,
+        element: <Layout />,
+        children: [
+            {
+                path: "",
+                element: <Home />,
+            },
+            {
+                path: "login",
+                children: [
+                    {
+                        path: "kakao",
+                        element: <Kakao />,
+                    },
+                    {
+                        path: "naver",
+                        element: <SNSLogin />,
+                    },
+                ],
+            },
+        ],
+    },
+]);
 
 function App() {
-    return (
-        <Center w="100%" h="100vh">
-            <Center
-                w="250px"
-                h="50px"
-                borderRadius="30px"
-                bgColor="yellow.400"
-                _hover={{
-                    cursor: "pointer",
-                    bgColor: "yellow.500",
-                }}
-                transition="all 0.2s linear"
-            >
-                <Text fontWeight="bold" fontSize="25px">
-                    카카오 로그인하기
-                </Text>
-            </Center>
-        </Center>
-    );
+    return <RouterProvider router={router} />;
 }
 
 export default App;
