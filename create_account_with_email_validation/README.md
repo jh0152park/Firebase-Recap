@@ -13,8 +13,36 @@
 그 이후 Sign in with email을 하는 과정에서 `user.emailVerfied`가 `True`일 경우 정상적으로 로그인을 진행하게 되고,
 인증이 되지 않았을 경우 로그인을 제한할 수 있다.
 
-![스크린샷 2023-12-31 오후 5 43 08](https://github.com/jh0152park/Firebase-Recap/assets/118165975/60f77827-1731-4974-a5ad-81c63c5fc14c)
-## Verification link at email
 
-![스크린샷 2023-12-31 오후 5 45 08](https://github.com/jh0152park/Firebase-Recap/assets/118165975/c2a08aff-e1c9-4fa7-9779-484f9837d0d9)
+----------
+
+## Verification link at email
+![스크린샷 2023-12-31 오후 5 43 08](https://github.com/jh0152park/Firebase-Recap/assets/118165975/60f77827-1731-4974-a5ad-81c63c5fc14c)
+
+
 ## user.emailVerified 값
+![스크린샷 2023-12-31 오후 5 45 08](https://github.com/jh0152park/Firebase-Recap/assets/118165975/c2a08aff-e1c9-4fa7-9779-484f9837d0d9)
+
+## Send email code
+```JS
+function onSubmit(data: any) {
+        setCreate(true);
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+            .then((userCredential) => {
+                sendEmailVerification(userCredential.user).then(() => {
+                    alert("send verification email");
+                    console.log(userCredential.user.email);
+                    console.log(userCredential.user.emailVerified);
+                });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(`code: ${errorCode}, message: ${errorMessage}`);
+            })
+            .finally(() => {
+                reset();
+                setCreate(false);
+            });
+    }
+```
