@@ -1,46 +1,20 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![스크린샷 2023-12-31 오후 5 05 14](https://github.com/jh0152park/Firebase-Recap/assets/118165975/e5a75a16-09c0-4241-836f-a18ecfd2244c)
 
-## Available Scripts
+### 혹시 모르니 Firebase console에서 비밀번호가 없는 email login 허용해준다.
 
-In the project directory, you can run:
+# Workflow
+이메일 계정 인증은 `이메일 + 비밀번호로 계정을 만드는 단계`에서 추가적으로 이루어지는 과정이다.
 
-### `npm start`
+따라서 계정을 생성만 할뿐 자동으로 로그인이 되도록 해서는 안된다. (이메일 인증이 아직 이루어 지지 않았기 때문이다.)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+이메일과 비밀번호로 계정을 만들었으면, 해당 이메일로 Verification link를 전송하고, Valid한 Email이라면 해당 link를 통해 이메일 인증을 진행한다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+그 이후 Sign in with email을 하는 과정에서 `user.emailVerfied`가 `True`일 경우 정상적으로 로그인을 진행하게 되고,
+인증이 되지 않았을 경우 로그인을 제한할 수 있다.
 
-### `npm test`
+![스크린샷 2023-12-31 오후 5 43 08](https://github.com/jh0152park/Firebase-Recap/assets/118165975/60f77827-1731-4974-a5ad-81c63c5fc14c)
+## Verification link at email
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+![스크린샷 2023-12-31 오후 5 45 08](https://github.com/jh0152park/Firebase-Recap/assets/118165975/c2a08aff-e1c9-4fa7-9779-484f9837d0d9)
+## user.emailVerified 값
