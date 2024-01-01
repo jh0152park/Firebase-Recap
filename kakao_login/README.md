@@ -199,7 +199,7 @@ async function getKakaoUser(token: string): Promise<KakaoUser> {
 
 ## 24. [함수배포](https://firebase.google.com/docs/functions/get-started?hl=ko&gen=2nd#deploy-functions-to-a-production-environment)
 
-    - `firebase deploy --only functions`
+    - firebase deploy --only functions
 
 배포가 완료되면 Firebase Console -> 모든 제품 -> Functions에서 확인 가능
 
