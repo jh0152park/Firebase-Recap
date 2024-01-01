@@ -180,3 +180,68 @@ async function getKakaoUser(token: string): Promise<KakaoUser> {
 #### c. Download된 키 파일을 이용해 Admin App을 초기화하기 위해서 Secret Manager를 이용해 환경을 구성해야함
 
 #### d. 먼저 구글 콘솔로 이동해 보안 비밀을 생성. [바로가기](https://console.cloud.google.com/)
+
+        - 결제 정보가 연동이 되어야 보안 비밀 생성이 가능
+
+#### e. 이름, 다운로드 했던 비공개키 업로드
+
+#### f. `functions/src/index.ts`의 exports.auth = 부분에 생성한 보안 비밀에 접근할 수 있도록 runWith추가
+
+#### g. Admin app 초기화 코드 작성
+
+## 22. 사용자 만들기
+
+생성한 app을 이용해 auth service를 불러오고 유저 업데이트를 시도함.
+만약 유저가 없다면 `auth/user-not-found` 에러가 발생하므로, try-catch문을 이용해 유저 생성 코드를 작성해야함.
+[추가 오류 코드 목록](https://firebase.google.com/docs/auth/admin/errors?hl=ko)
+
+## 23. [커스텀 토큰 만들기](https://firebase.google.com/docs/auth/admin/create-custom-tokens?hl=ko)
+
+## 24. [함수배포](https://firebase.google.com/docs/functions/get-started?hl=ko&gen=2nd#deploy-functions-to-a-production-environment)
+
+    - `firebase deploy --only functions`
+
+배포가 완료되면 Firebase Console -> 모든 제품 -> Functions에서 확인 가능
+
+배포 시도시 --fix 에러가 발생할 경우
+
+```
+$ (cd functions && npx eslint . --fix)
+# or
+$ (cd functions && node_modules/eslint/bin/eslint.js . --fix)
+```
+
+배포 시도시 `Missing JSDoc comment` 에러가 발생할 경우, `.eslintrc.js`파일의 `rules`부분에 아래와 같이 에러가 나는 함수를 추가
+
+```
+"require-jsdoc": [
+    "error",
+    {
+        require: {
+            getToken: false,
+            getKakaoUser: false,
+            getAdminApp: false,
+            updateOrCreateUser: false,
+        },
+    },
+],
+```
+
+위 방법이 동작하지 않는다면, 함수들을 function이 아닌 arrow function으로 다시 작성한다.
+
+추가적으로 react-router 에서 deploy functions 중 에러가 발생되고있다.
+
+버전6부터 `@types/react-router-dom`이 필요하지 않으므로 삭제하도록 한다. `npm uninstall @types/react-router-dom`
+[참고링크](https://stackoverflow.com/questions/70138299/types-react-router-dom-gives-errors-when-vite-build)
+
+```
+Error: Your project recap-1daad must be on the Blaze (pay-as-you-go) plan to complete this command. Required API cloudbuild.googleapis.com can't be enabled until the upgrade is complete. To upgrade, visit the following URL:
+
+https://console.firebase.google.com/project/recap-1daad/usage/details
+```
+
+또 위와같은 에러가 발생할 경우, firebase console에서 요금제를 아직 변경하지 않아서 발생하는 에러이다.
+
+이미 결제정보는 입력해 두었으므로 콘솔에서 요금제를 Spark 에서 Blaze로 변경하자.
+
+이후 디플로이 시도시 빈번하게 에러가 발생하는데, 에러를 잘 처리하고 다시 확인해보자. (dependencies가 잘 설치 되어있는지 등등)
