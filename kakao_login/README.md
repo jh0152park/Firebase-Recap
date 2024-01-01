@@ -31,6 +31,7 @@
 ![스크린샷 2023-12-31 오후 10 10 46](https://github.com/jh0152park/Firebase-Recap/assets/118165975/30a76b59-b771-4053-83f2-f09386895e2b)
 
 ## 7. 동의항목 => 필요한 데이터 설정 ex)프로필 정보, 이메일, 성별, etc...
+
 ![스크린샷 2023-12-31 오후 10 46 16](https://github.com/jh0152park/Firebase-Recap/assets/118165975/e424c749-c333-412e-a5d0-f463566f5357)
 
 ## 8. [JavaScript Download](https://developers.kakao.com/docs/latest/ko/javascript/download) 에서 Full SDK 복사 후 `public/index.html`의 head 부분에 복사
@@ -60,6 +61,7 @@ function onLoginWithKakao() {
 ```
 
 ## 11. 로그인이 정상적으로 이루어졌다면, 미리 정의해둔 Redirect URL로 이동하게되고 Token이 함께 넘어옴
+
 ![스크린샷 2023-12-31 오후 11 24 18](https://github.com/jh0152park/Firebase-Recap/assets/118165975/30018093-d372-42ca-bba1-749bbda1a16f)
 
 ## 12. `URLSearchParams`를 이용해 code(token)값을 갖고오고, 만약 없다면 로그인을 다시하도록 구성
@@ -128,5 +130,53 @@ exports.auth = functions.https.onRequest(app);
 ### [KAKAO REST API DOC](https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token)
 
 ## 17. 토큰을 요청하기 위해서는 REST API키가 필수이고, 이는 [내 애플리케이션] > [앱 키]에서 확인 가능
+
 ![스크린샷 2024-01-01 오전 12 16 52](https://github.com/jh0152park/Firebase-Recap/assets/118165975/c172225c-731a-4f40-835b-e5a3abec1ddd)
 
+## 18. axios를 이용해 HTTP 통신을 처리하고, dotenv도 함께 설치 `npm install dotenv axios`
+
+## 19. getToken 함수 작성
+
+```JS
+async function getToken(code: string): Promise<ITokenResponse> {
+    const body = {
+        grant_type: "authorization_code",
+        client_id: process.env.REACT_APP_KAKAO_REST_API_KEY as "",
+        redirect_uri: process.env.REACT_APP_KAKAO_REDIRECT_URI as "",
+        code: code,
+    };
+
+    const res = await axios.post(
+        "https://kauth.kakao.com/oauth/token",
+        new URLSearchParams(body)
+    );
+    return res.data;
+}
+```
+
+## 20. getKakaoUser 함수 작성
+
+```JS
+async function getKakaoUser(token: string): Promise<KakaoUser> {
+    const res = await axios.get("https://kapi.kakao.com/v2/user/me", {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+}
+```
+
+## 21. `npm install firebase-admin` 명렁어로 설치
+
+#### 가져온 카카오 유저 정보를 바탕으로 Firebae Authentication을 이용해 사용자를 생성해 주어야 하고,
+
+#### 이때 사용자와 Custom Token을 생성하기 위해서 Admin SDK가 필요.
+
+### 21-1. 서비스 계정의 비공개 키 파일 생성
+
+#### a. Firebase Console -> Project 설정 -> 서비스 계정 -> 새 비공개 키 생성
+
+#### b. 생성된 키는 download되는데 복구가 불가능하니 잘 간직
+
+#### c. Download된 키 파일을 이용해 Admin App을 초기화하기 위해서 Secret Manager를 이용해 환경을 구성해야함
+
+#### d. 먼저 구글 콘솔로 이동해 보안 비밀을 생성. [바로가기](https://console.cloud.google.com/)
