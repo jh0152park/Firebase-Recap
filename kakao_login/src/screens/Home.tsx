@@ -26,6 +26,9 @@ export default function Home() {
         });
     }
 
+    // console.log(JSON.parse(process.env.REACT_APP_SERVICE_ACCOUNT_KEY || ""));
+    console.log(process.env.REACT_APP_SERVICE_ACCOUNT_KEY);
+
     return (
         <Center w="100%" h="100vh">
             <Center
