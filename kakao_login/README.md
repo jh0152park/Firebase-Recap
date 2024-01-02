@@ -174,11 +174,13 @@ async function getKakaoUser(token: string): Promise<KakaoUser> {
 ### 21-1. 서비스 계정의 비공개 키 파일 생성
 
 #### a. Firebase Console -> Project 설정 -> 서비스 계정 -> 새 비공개 키 생성
+
 ![스크린샷 2024-01-01 오후 1 47 34](https://github.com/jh0152park/Firebase-Recap/assets/118165975/471b90c1-165d-4de6-bd2b-05d8f882f9de)
 
 #### b. 생성된 키는 download되는데 복구가 불가능하니 잘 간직
 
 #### c. Download된 키 파일을 이용해 Admin App을 초기화하기 위해서 Secret Manager를 이용해 환경을 구성해야함
+
 ![스크린샷 2024-01-01 오후 2 07 48](https://github.com/jh0152park/Firebase-Recap/assets/118165975/65105a3c-6efe-4406-9144-fa87018dcaed)
 
 #### d. 먼저 구글 콘솔로 이동해 보안 비밀을 생성. [바로가기](https://console.cloud.google.com/)
@@ -249,3 +251,20 @@ https://console.firebase.google.com/project/recap-1daad/usage/details
 
 이후 디플로이 시도시 빈번하게 에러가 발생하는데, 에러를 잘 처리하고 다시 확인해보자. (dependencies가 잘 설치 되어있는지 등등)
 ![스크린샷 2024-01-01 오후 11 07 55](https://github.com/jh0152park/Firebase-Recap/assets/118165975/f8c75e42-6816-421e-a681-9a51f4dac2bb)
+
+# ⚠️ functions/src/index.ts 에서 사용할 환경변수는 local .env 파일이 아닌 google cloud console에 보안 비밀로 만들어야함 ⚠️
+
+# 동시에 `functions/src/index.ts` 파일 에서도 아래와 같이 넣어줘야 함
+
+```JS
+exports.auth = functions
+    .runWith({
+        secrets: [
+            "SERVICE_ACCOUNT_KEY",
+            "KAKAO_CLIENT_SECRET_KEY",
+            "REACT_APP_KAKAO_REDIRECT_URI",
+            "REACT_APP_KAKAO_REST_API_KEY",
+        ],
+    })
+    .https.onRequest(app);
+```
