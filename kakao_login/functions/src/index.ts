@@ -83,9 +83,17 @@ app.post("/kakao", async (req, res) => {
     });
   }
 
+  console.log("received code: " + code);
+
   const response = await getToken(code);
   const token = response.access_token;
+
+  console.log("token: " + token);
+
   const kakaoUser = await getKakaoUser(token);
+
+  console.log("kakao user: " + kakaoUser);
+
   const authUser = await updateOrCreateUser(kakaoUser);
   const firebaseToken = await admin
     .auth()
